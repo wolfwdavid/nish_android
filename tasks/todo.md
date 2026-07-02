@@ -5,8 +5,8 @@ Native Android (Kotlin + Jetpack Compose) version of DevManiac, consuming the Fa
 ## Tasks
 
 - [x] T1 — Restructure repo: `frontend/` → `web/`, remove stray files, `licence` → `LICENSE`, gitignore for Android
-- [ ] T2 — Android Gradle scaffold (Gradle 8.10.2 wrapper, AGP 8.7.3, Kotlin 2.1.0, Compose, min 26 / target 35) — gate: `assembleDebug` green
-- [ ] T3 — Dark Material 3 theme (#0F0F0F / #E8560A) + bottom-nav shell (Explore, Projects, Live, Search, Profile)
+- [x] T2 — Android Gradle scaffold (Gradle 8.10.2 wrapper, AGP 8.7.3, Kotlin 2.1.0, Compose, min 26 / target 35) — gate: `assembleDebug` green
+- [x] T3 — Dark Material 3 theme (#0F0F0F / #E8560A) + bottom-nav shell (Explore, Projects, Live, Search, Profile)
 - [ ] T4 — Data layer: DTOs from backend Pydantic schemas, Retrofit ApiService, clerk-user-id auth interceptor, DataStore settings, repository interface + network impl
 - [ ] T5 — Demo mode: fixture JSON in assets + FixtureRepository (default ON)
 - [ ] T6 — Explore feed screen
