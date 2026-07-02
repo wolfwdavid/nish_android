@@ -12,6 +12,10 @@ This repository contains three peers:
 
 ## The Android app
 
+| Explore feed | Journal timeline | Project detail | Settings |
+|---|---|---|---|
+| ![Explore](docs/screenshots/explore.png) | ![Journal](docs/screenshots/journal-timeline.png) | ![Project](docs/screenshots/project-detail.png) | ![Settings](docs/screenshots/settings.png) |
+
 A read-first MVP that mirrors the web app's mobile layout (bottom navigation, dark burnt-orange theme):
 
 - **Explore** — the public feed of build events (journal entries, live-project launches, deployments, milestones)
