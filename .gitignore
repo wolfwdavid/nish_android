@@ -17,19 +17,31 @@ Thumbs.db
 .idea/
 
 # ==========================================
-# FRONTEND (Next.js)
+# WEB FRONTEND (Next.js)
 # ==========================================
-frontend/node_modules/
-frontend/.next/
-frontend/out/
-frontend/build/
+web/node_modules/
+web/.next/
+web/out/
+web/build/
 
-frontend/.vercel/
+web/.vercel/
 
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
-frontend/pnpm-debug.log*
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/pnpm-debug.log*
+
+# ==========================================
+# ANDROID
+# ==========================================
+android/local.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/.kotlin/
+android/captures/
+*.apk
+*.aab
 
 # ==========================================
 # BACKEND (FastAPI / Python)
