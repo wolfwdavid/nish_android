@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -52,11 +53,19 @@ fun ProfileScreen(
         is UiState.Loading -> LoadingState()
         is UiState.Error -> ErrorState(message = current.message, onRetry = viewModel::load)
         is UiState.Content -> {
-            val profile = current.value
+            val content = current.value
+            val profile = content.profile
             if (profile == null) {
                 NotSignedIn(onOpenSettings)
             } else {
-                ProfileContent(profile, showSettings = username == null, onOpenSettings = onOpenSettings)
+                ProfileBody(
+                    profile = profile,
+                    showSettings = username == null,
+                    onOpenSettings = onOpenSettings,
+                    isFollowing = content.isFollowing,
+                    followBusy = content.followBusy,
+                    onToggleFollow = viewModel::toggleFollow,
+                )
             }
         }
     }
@@ -86,10 +95,13 @@ private fun NotSignedIn(onOpenSettings: () -> Unit) {
 }
 
 @Composable
-private fun ProfileContent(
+private fun ProfileBody(
     profile: ProfileDto,
     showSettings: Boolean,
     onOpenSettings: () -> Unit,
+    isFollowing: Boolean?,
+    followBusy: Boolean,
+    onToggleFollow: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -126,6 +138,25 @@ private fun ProfileContent(
                             tint = TextMuted,
                         )
                     }
+                }
+            }
+        }
+        if (isFollowing != null) {
+            item {
+                Button(
+                    onClick = onToggleFollow,
+                    enabled = !followBusy,
+                    colors = if (isFollowing) {
+                        ButtonDefaults.buttonColors(
+                            containerColor = SurfaceCard,
+                            contentColor = TextMuted,
+                        )
+                    } else {
+                        ButtonDefaults.buttonColors()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(if (isFollowing) "Following" else "Follow")
                 }
             }
         }
