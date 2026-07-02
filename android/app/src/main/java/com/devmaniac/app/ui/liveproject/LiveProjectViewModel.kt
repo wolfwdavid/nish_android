@@ -8,6 +8,7 @@ import com.devmaniac.app.data.dto.LiveProjectDto
 import com.devmaniac.app.di.AppContainer
 import com.devmaniac.app.ui.common.UiState
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -41,11 +42,13 @@ class LiveProjectViewModel(
         viewModelScope.launch {
             _state.value = try {
                 val repo = container.repository()
-                val project = async { repo.liveProject(slug) }
-                val journals = async { repo.journals(slug) }
-                val myProfile = async { runCatching { repo.myProfile() }.getOrNull() }
-                val loadedProject = project.await()
-                UiState.Content(
+                // coroutineScope contains async child failures so the catch
+                // below sees them instead of the app-level crash handler.
+                val content = coroutineScope {
+                    val project = async { repo.liveProject(slug) }
+                    val journals = async { repo.journals(slug) }
+                    val myProfile = async { runCatching { repo.myProfile() }.getOrNull() }
+                    val loadedProject = project.await()
                     LiveProjectContent(
                         project = loadedProject,
                         // Newest first, like the web timeline.
@@ -53,7 +56,8 @@ class LiveProjectViewModel(
                         isOwner = myProfile.await()?.id == loadedProject.user_id,
                         likedJournalIds = previousLikes,
                     )
-                )
+                }
+                UiState.Content(content)
             } catch (e: Exception) {
                 UiState.Error(e.message ?: "Failed to load live project")
             }

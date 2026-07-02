@@ -16,6 +16,10 @@ This repository contains three peers:
 |---|---|---|---|
 | ![Explore](docs/screenshots/explore.png) | ![Journal](docs/screenshots/journal-timeline.png) | ![Project](docs/screenshots/project-detail.png) | ![Settings](docs/screenshots/settings.png) |
 
+| Threaded comments & votes | Session composer | Published entry | Follow |
+|---|---|---|---|
+| ![Comments](docs/screenshots/comments-votes.png) | ![Composer](docs/screenshots/journal-composer.png) | ![Published](docs/screenshots/composer-published.png) | ![Follow](docs/screenshots/follow.png) |
+
 Mirrors the web app's mobile layout (bottom navigation, dark burnt-orange theme):
 
 - **Explore** — the public feed of build events (journal entries, live-project launches, deployments, milestones)

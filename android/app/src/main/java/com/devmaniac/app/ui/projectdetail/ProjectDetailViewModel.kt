@@ -8,6 +8,7 @@ import com.devmaniac.app.data.dto.ProjectDto
 import com.devmaniac.app.di.AppContainer
 import com.devmaniac.app.ui.common.UiState
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -37,9 +38,14 @@ class ProjectDetailViewModel(
         viewModelScope.launch {
             _state.value = try {
                 val repo = container.repository()
-                val project = async { repo.project(slug) }
-                val comments = async { repo.projectComments(slug) }
-                UiState.Content(ProjectDetailContent(project.await(), comments.await()))
+                // coroutineScope contains async child failures so the catch
+                // below sees them instead of the app-level crash handler.
+                val content = coroutineScope {
+                    val project = async { repo.project(slug) }
+                    val comments = async { repo.projectComments(slug) }
+                    ProjectDetailContent(project.await(), comments.await())
+                }
+                UiState.Content(content)
             } catch (e: Exception) {
                 UiState.Error(e.message ?: "Failed to load project")
             }

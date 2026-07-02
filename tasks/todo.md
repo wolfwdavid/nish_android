@@ -32,7 +32,9 @@ Native Android (Kotlin + Jetpack Compose) version of DevManiac, consuming the Fa
 
 ### Phase 2 review
 
-Backend fixes verified by py_compile + code review (runtime needs Python 3.14 + Postgres, not available on this machine — deploy box must run `poetry lock && poetry install` for the new pyjwt dependency). Android verified by green `assembleDebug` at every task gate and a demo-mode emulator walkthrough exercising every write path. Clerk SDK API surface was verified by decompiling the actual 1.0.32 artifact (javap) before coding against it.
+Backend fixes verified by py_compile + code review (runtime needs Python 3.14 + Postgres, not available on this machine — deploy box must run `poetry lock && poetry install` for the new pyjwt dependency). Android verified by green `assembleDebug` at every task gate and a demo-mode emulator walkthrough exercising every write path: star toggle (persists via overlay across re-entry), bookmark, comment post + reply + upvote (12→13), journal like (44→45), owner-gated FAB + composer publishing a Day 19 milestone with progress (hero updated 45%→50%), follow (356→357, button flips). Clerk SDK API surface was verified by decompiling the actual 1.0.32 artifact (javap) before coding against it.
+
+Emulator verification caught one real bug: `async` inside `viewModelScope.launch` crashed the app on network errors (structured-concurrency exception propagation bypasses try/catch around await). Fixed by containing concurrent fetches in `coroutineScope` in both detail ViewModels; regression-tested — network-mode failures now render the Retry error state, zero crashes after the fix.
 
 ## Phase 1 review
 
