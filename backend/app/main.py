@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.core.clerk_jwt import ClerkJWTMiddleware
 from app.core.database import engine, Base
 
 import app.models
@@ -45,6 +46,11 @@ origins = [
     "https://devmaniac.com",
     "https://www.devmaniac.com",
 ]
+
+# Verifies Clerk JWTs when CLERK_JWT_ISSUER is set; pass-through otherwise.
+# Added before CORSMiddleware so CORS stays outermost and still decorates
+# 401 responses for browser clients.
+app.add_middleware(ClerkJWTMiddleware)
 
 app.add_middleware(
     CORSMiddleware,

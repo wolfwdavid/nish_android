@@ -41,6 +41,15 @@ class Settings(BaseSettings):
 
     CLERK_SECRET_KEY: str | None = None
 
+    # Clerk JWT issuer (e.g. https://your-app.clerk.accounts.dev).
+    # When set, Authorization: Bearer tokens are verified against its JWKS
+    # and override any client-supplied clerk_user_id.
+    CLERK_JWT_ISSUER: str | None = None
+
+    # When true, raw clerk_user_id claims without a verified Bearer token
+    # are rejected (disables legacy trust-the-client identity).
+    CLERK_REQUIRE_JWT: bool = False
+
 
     # =========================================================
     # CLOUDINARY / MEDIA
