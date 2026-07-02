@@ -1,6 +1,7 @@
 package com.devmaniac.app.ui.projectdetail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,12 +21,16 @@ import com.devmaniac.app.ui.components.AsyncAvatar
 import com.devmaniac.app.ui.theme.PrimaryBright
 import com.devmaniac.app.ui.theme.SurfaceElevated
 import com.devmaniac.app.ui.theme.TextFaint
+import com.devmaniac.app.ui.theme.TextMuted
 
 @Composable
 fun CommentItem(
     comment: CommentDto,
     modifier: Modifier = Modifier,
     isReply: Boolean = false,
+    canWrite: Boolean = false,
+    onVote: ((commentId: String, voteType: String) -> Unit)? = null,
+    onReply: ((CommentDto) -> Unit)? = null,
 ) {
     Column(
         modifier = modifier
@@ -63,11 +68,44 @@ fun CommentItem(
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(top = 6.dp),
         )
-        Text(
-            text = "▲ ${comment.score}",
-            style = MaterialTheme.typography.labelSmall,
-            color = if (comment.score > 0) PrimaryBright else TextFaint,
-            modifier = Modifier.padding(top = 6.dp),
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(top = 8.dp),
+        ) {
+            Text(
+                text = "▲",
+                style = MaterialTheme.typography.labelMedium,
+                color = if (canWrite) PrimaryBright else TextFaint,
+                modifier = if (canWrite && onVote != null) {
+                    Modifier.clickable { onVote(comment.id, "up") }.padding(horizontal = 4.dp)
+                } else {
+                    Modifier.padding(horizontal = 4.dp)
+                },
+            )
+            Text(
+                text = "${comment.score}",
+                style = MaterialTheme.typography.labelMedium,
+                color = if (comment.score > 0) PrimaryBright else TextMuted,
+            )
+            Text(
+                text = "▼",
+                style = MaterialTheme.typography.labelMedium,
+                color = if (canWrite) TextMuted else TextFaint,
+                modifier = if (canWrite && onVote != null) {
+                    Modifier.clickable { onVote(comment.id, "down") }.padding(horizontal = 4.dp)
+                } else {
+                    Modifier.padding(horizontal = 4.dp)
+                },
+            )
+            if (canWrite && !isReply && onReply != null) {
+                Spacer(Modifier.width(12.dp))
+                Text(
+                    text = "Reply",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = TextMuted,
+                    modifier = Modifier.clickable { onReply(comment) },
+                )
+            }
+        }
     }
 }

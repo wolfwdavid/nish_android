@@ -15,12 +15,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -32,6 +41,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -42,6 +52,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.devmaniac.app.auth.AuthState
+import com.devmaniac.app.data.dto.CommentDto
 import com.devmaniac.app.data.dto.ProjectDto
 import com.devmaniac.app.ui.common.UiState
 import com.devmaniac.app.ui.common.containerViewModelFactory
@@ -52,6 +64,7 @@ import com.devmaniac.app.ui.components.ErrorState
 import com.devmaniac.app.ui.components.LoadingState
 import com.devmaniac.app.ui.components.TechChips
 import com.devmaniac.app.ui.theme.Background
+import com.devmaniac.app.ui.theme.Outline
 import com.devmaniac.app.ui.theme.PrimaryBright
 import com.devmaniac.app.ui.theme.SurfaceCard
 import com.devmaniac.app.ui.theme.TextFaint
@@ -71,6 +84,8 @@ fun ProjectDetailScreen(
     ),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val authState by viewModel.authState.collectAsStateWithLifecycle()
+    val canWrite = authState != AuthState.SignedOut
     var selectedTab by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -85,6 +100,25 @@ fun ProjectDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    val project = (state as? UiState.Content)?.value?.project
+                    if (project != null && canWrite) {
+                        IconButton(onClick = viewModel::toggleStar) {
+                            Icon(
+                                imageVector = if (project.is_starred) Icons.Filled.Star else Icons.Outlined.StarBorder,
+                                contentDescription = if (project.is_starred) "Unstar" else "Star",
+                                tint = if (project.is_starred) PrimaryBright else TextMuted,
+                            )
+                        }
+                        IconButton(onClick = viewModel::toggleBookmark) {
+                            Icon(
+                                imageVector = if (project.is_bookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                                contentDescription = if (project.is_bookmarked) "Remove bookmark" else "Bookmark",
+                                tint = if (project.is_bookmarked) PrimaryBright else TextMuted,
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -130,7 +164,12 @@ fun ProjectDetailScreen(
                         0 -> OverviewTab(current.value.project, onOpenUser)
                         1 -> GalleryTab(current.value.project)
                         2 -> UpdatesTab(current.value.project)
-                        3 -> CommentsTab(current.value)
+                        3 -> CommentsTab(
+                            content = current.value,
+                            canWrite = canWrite,
+                            onAddComment = viewModel::addComment,
+                            onVote = viewModel::vote,
+                        )
                     }
                 }
             }
@@ -307,21 +346,102 @@ private fun UpdatesTab(project: ProjectDto) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CommentsTab(content: ProjectDetailContent) {
-    if (content.comments.isEmpty()) {
-        EmptyState("No comments yet")
-        return
-    }
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        content.comments.forEach { comment ->
-            item(key = comment.id) { CommentItem(comment) }
-            items(comment.replies, key = { it.id }) { reply ->
-                CommentItem(reply, isReply = true)
+private fun CommentsTab(
+    content: ProjectDetailContent,
+    canWrite: Boolean,
+    onAddComment: (text: String, parentId: String?) -> Unit,
+    onVote: (commentId: String, voteType: String) -> Unit,
+) {
+    var draft by remember { mutableStateOf("") }
+    var replyTo by remember { mutableStateOf<CommentDto?>(null) }
+
+    Column(Modifier.fillMaxSize()) {
+        if (content.comments.isEmpty()) {
+            Column(Modifier.weight(1f)) { EmptyState("No comments yet — start the thread") }
+        } else {
+            LazyColumn(
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.weight(1f),
+            ) {
+                content.comments.forEach { comment ->
+                    item(key = comment.id) {
+                        CommentItem(
+                            comment = comment,
+                            canWrite = canWrite,
+                            onVote = onVote,
+                            onReply = { replyTo = it },
+                        )
+                    }
+                    items(comment.replies, key = { it.id }) { reply ->
+                        CommentItem(reply, isReply = true, canWrite = canWrite, onVote = onVote)
+                    }
+                }
+            }
+        }
+
+        if (canWrite) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .background(SurfaceCard)
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .imePadding(),
+            ) {
+                replyTo?.let { target ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Replying to ${target.user.display_name}",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = PrimaryBright,
+                            modifier = Modifier.weight(1f),
+                        )
+                        IconButton(onClick = { replyTo = null }) {
+                            Icon(
+                                Icons.Filled.Close,
+                                contentDescription = "Cancel reply",
+                                tint = TextMuted,
+                            )
+                        }
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    OutlinedTextField(
+                        value = draft,
+                        onValueChange = { draft = it },
+                        placeholder = {
+                            Text(
+                                text = if (replyTo == null) "Add a comment…" else "Write a reply…",
+                                color = TextFaint,
+                            )
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = Outline,
+                            focusedTextColor = MaterialTheme.colorScheme.onBackground,
+                            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+                            cursorColor = MaterialTheme.colorScheme.primary,
+                        ),
+                        maxLines = 4,
+                        modifier = Modifier.weight(1f),
+                    )
+                    IconButton(
+                        onClick = {
+                            onAddComment(draft, replyTo?.id)
+                            draft = ""
+                            replyTo = null
+                        },
+                        enabled = draft.isNotBlank() && !content.postingComment,
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.Send,
+                            contentDescription = "Post comment",
+                            tint = if (draft.isNotBlank()) PrimaryBright else TextFaint,
+                        )
+                    }
+                }
             }
         }
     }
