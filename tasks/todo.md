@@ -16,7 +16,25 @@ Native Android (Kotlin + Jetpack Compose) version of DevManiac, consuming the Fa
 - [x] T10 — Docs: README rewrite, docs/ARCHITECTURE.md, docs/API.md, docs/BUILD.md, docs/PORTING-NOTES.md
 - [x] T11 — Emulator verification walkthrough + fixes
 
-## Review
+## Phase 2 — Write operations + Clerk auth
+
+- [x] P2-T1 — Fix comment update/delete/vote 500s (router passed wrong kwarg to service layer)
+- [x] P2-T2 — Fix follow counters (decremented instead of incremented)
+- [x] P2-T3 — Optional Clerk JWT verification middleware (JWKS, sub overrides client identity, CLERK_REQUIRE_JWT)
+- [x] P2-T4 — Write endpoints in ApiService + repositories (star, bookmark, comments, votes, journals, likes, follow, sync_user) with 409/404 state-sync mapping
+- [x] P2-T5 — Demo-mode session-scoped write overlay in FixtureRepository
+- [x] P2-T6 — Clerk Android SDK integration (key-gated), AuthManager, Bearer-token interceptor; toolchain bump to Kotlin 2.4 / AGP 8.11 / Gradle 8.13 / compileSdk 36
+- [x] P2-T7 — Sign-in screen + Settings account section
+- [x] P2-T8 — Project detail: star/bookmark toggles, comment composer + replies + voting
+- [x] P2-T9 — Journal likes + owner-only session composer (entry type, code snippet, problem/solution, progress)
+- [x] P2-T10 — Follow/unfollow on profiles
+- [x] P2-T11 — Docs updates + emulator write walkthrough
+
+### Phase 2 review
+
+Backend fixes verified by py_compile + code review (runtime needs Python 3.14 + Postgres, not available on this machine — deploy box must run `poetry lock && poetry install` for the new pyjwt dependency). Android verified by green `assembleDebug` at every task gate and a demo-mode emulator walkthrough exercising every write path. Clerk SDK API surface was verified by decompiling the actual 1.0.32 artifact (javap) before coding against it.
+
+## Phase 1 review
 
 All 11 tasks done. `assembleDebug` green at every gate; full demo-mode walkthrough on the Medium_Phone_API_36 emulator verified Explore, Projects, project detail (all four tabs incl. threaded comments), Live builds, journal timeline (day badges, entry-type chips, media, code, problem→solution), debounced Search, Profile, and Settings — zero AndroidRuntime crashes. Screenshots captured to docs/screenshots/ and embedded in the README.
 

@@ -57,8 +57,54 @@ Screen (Compose) → ViewModel.load() → container.repository()  ── demoMod
 
 Material 3 `darkColorScheme` pinned to the web palette: background `#0F0F0F`, cards `#171717`/`#1F1F1F`, primary `#E8560A` with bright accent `#FB923C`, muted text zinc-400/500, hairline outlines at 10% white. Display type uses the platform serif (web uses Instrument Serif), code blocks use the platform monospace (web uses JetBrains Mono) — zero bundled font assets.
 
+## Authentication (Phase 2)
+
+`auth/AuthManager.kt` is the single source of truth for identity, exposing a
+`StateFlow<AuthState>`:
+
+```
+AuthState = SignedOut | DevUser(clerkUserId) | ClerkUser(clerkUserId, email)
+```
+
+Priority: a signed-in **Clerk session** wins; otherwise **demo mode** acts as
+the bundled demo builder; otherwise the Settings **dev user id**; otherwise
+signed out. All Clerk SDK symbols live in `AuthManager` + `SignInViewModel`
+only — the rest of the app sees `AuthState`.
+
+- Clerk (`com.clerk:clerk-android-api`) initializes in `DevManiacApp` only
+  when `CLERK_PUBLISHABLE_KEY` is non-empty (read from `local.properties`
+  key `clerk.publishableKey` at build time). Keyless builds never touch the
+  SDK and fall back to dev sign-in.
+- `AuthInterceptor` reads the live auth state per request: Clerk sessions
+  send `Authorization: Bearer <session JWT>` (via `Clerk.auth.getToken()`,
+  cached by the SDK) plus the legacy `clerk-user-id` header; dev users send
+  the header only. `runBlocking` in the interceptor is safe — Retrofit
+  suspend calls run interceptors on OkHttp dispatcher threads.
+- After Clerk sign-in the app POSTs `/sync_user/` to provision the user row.
+- Server side, the optional JWT middleware verifies Bearer tokens and
+  overrides client-supplied identity — see [API.md](API.md).
+
+## Write operations (Phase 2)
+
+The repository interface gained star/bookmark/comment/vote/journal/like/
+follow/sync methods. Two implementation notes:
+
+- **State-sync error mapping** lives inside `NetworkRepository`: 409 on a
+  duplicate create and 404 on a missing delete both mean "already in the
+  requested state" and resolve by refetching rather than surfacing errors.
+- **Demo mode stays writable**: `FixtureRepository` keeps a session-scoped
+  in-memory overlay (stars, bookmarks, added comments + votes, added
+  journals, likes, follows) that is merged into *every* read path, so
+  optimistic writes survive screen reloads. The overlay resets when settings
+  changes rebuild the repository or the app restarts.
+
+ViewModels apply optimistic updates and reconcile from responses (star
+returns the full project; journal like returns the fresh count; votes re-read
+the comment list because the server semantics are toggle/switch).
+
 ## What's deliberately not here (yet)
 
-- Writes/mutations (comments, stars, journal composer) — the MVP is read-first
-- Real authentication — see the auth caveat in [API.md](API.md) and [PORTING-NOTES.md](PORTING-NOTES.md)
+- Media uploads (Cloudinary direct upload), push notifications
+- Journal comments UI (the backend schema returns no user or threading data)
+- Edit/delete flows, project creation, onboarding
 - Offline caching beyond the fixture set; realtime (the backend has none either)

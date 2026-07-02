@@ -32,14 +32,15 @@ Three options were weighed:
 - **Feed `event_type` values** actually emitted/rendered: `journal_published`, `live_project_created`, `deployment`, `milestone` (the web `FeedEventCard` mapping) — not the journal `entry_type` vocabulary.
 - **README env-var drift**: the web code reads `NEXT_PUBLIC_BACKEND_URL`, while the upstream README documents `NEXT_PUBLIC_API_URL`.
 
-## Auth: the big caveat
+## Auth: from caveat to implementation (Phase 2)
 
-The backend trusts a raw `clerk-user-id` header / `clerk_user_id` query param with **no token verification**. The Android app mirrors this with a "dev sign-in" (paste a user id in Settings) — deliberately labeled dev-only.
+Upstream, the backend trusts a raw `clerk-user-id` header / `clerk_user_id` query param with **no token verification**. Phase 2 closed that gap on both sides while staying backward compatible:
 
-Path to production auth:
-1. Backend: verify Clerk JWTs (`CLERK_JWT_ISSUER` + JWKS) in `core/auth.py` instead of trusting the header.
-2. Android: adopt the Clerk Android SDK for real sign-in/sign-up, send `Authorization: Bearer <session JWT>`.
-3. Keep the header path behind a debug flag for local development.
+1. **Backend**: `core/clerk_jwt.py` middleware verifies `Authorization: Bearer` Clerk JWTs against the issuer's JWKS when `CLERK_JWT_ISSUER` is set, and the verified `sub` overrides any client-supplied identity. `CLERK_REQUIRE_JWT=true` disables the legacy trust-the-client path entirely.
+2. **Android**: the official Clerk Android SDK (`com.clerk:clerk-android-api`) drives email+password sign-in when a publishable key is configured; the session JWT rides every request as a Bearer token. Keyless builds fall back to the dev sign-in.
+3. The dev header path remains for local development (issuer unset, or `CLERK_REQUIRE_JWT=false`).
+
+Integrating the Clerk SDK forced a toolchain bump: it requires **compileSdk 36** and is compiled with **Kotlin 2.4**, which pulled the project to AGP 8.11.1 / Gradle 8.13 / Kotlin 2.4.0 (and a `packaging` exclude for a duplicate `META-INF` resource from its transitive OkHttp 5).
 
 ## Demo mode design
 
@@ -51,9 +52,18 @@ The backend requires Python 3.14 + PostgreSQL, which makes "clone → run the ap
 - Web display font (Instrument Serif) → platform serif; JetBrains Mono code blocks → platform monospace. Zero bundled font files; swap in the real OFL fonts later by dropping TTFs into `res/font/` and updating `Type.kt`.
 - The web's Reddit-style comment votes render read-only as `▲ score`.
 
+## Backend bugs found and fixed while porting
+
+- Comment edit/delete/vote handlers crashed with 500 (wrong kwarg into the service layer) — fixed in `router/project.py`.
+- Follow decremented follower counts instead of incrementing — fixed in `service/follow.py`. The app still refetches the profile after a follow toggle so it renders correct counts even against unfixed deployments.
+- Journals carry no per-user `is_liked` flag, so liked state is session-local on Android; the 409/404 state-sync mapping self-heals divergence.
+
 ## Deferred / future work
 
-- Writes: comments, votes, stars, bookmarks, journal composer, project creation
-- Real Clerk auth (above), push notifications (backend has a notification model but no delivery), Cloudinary direct-upload flow for media
-- Follow/unfollow, bookmarks tab, dashboard, changelog screens
+- Media uploads (Cloudinary direct upload) for journal entries and projects
+- Push notifications (backend has a notification model but no delivery)
+- Journal comments UI (backend returns no commenter identity or threading — needs backend schema work first)
+- Edit/delete flows for comments, journals, projects; project + live-project creation; onboarding wizard
+- Bookmarks tab, dashboard, changelog screens
+- Real-backend E2E test with Clerk keys + Postgres; release signing / Play Store packaging
 - Paging 3 for the projects list if the dataset grows; image preloading; tablet layouts

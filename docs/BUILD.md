@@ -6,9 +6,9 @@ No Android Studio required. Everything below runs from a shell.
 
 | Tool | Version | Notes |
 |---|---|---|
-| JDK | **17** (Temurin tested) | AGP 8.7 requires 17+. If `JAVA_HOME` points elsewhere (e.g. an old JDK 11), override it for the build shell. |
-| Android SDK | platform **android-35**, build-tools 35.x | Default Windows location: `%LOCALAPPDATA%\Android\Sdk` |
-| Gradle | — | Not needed globally; the repo commits the **Gradle 8.10.2 wrapper** |
+| JDK | **17** (Temurin tested) | AGP requires 17+. If `JAVA_HOME` points elsewhere (e.g. an old JDK 11), override it for the build shell. |
+| Android SDK | platform **android-36**, build-tools 36.x | Required by the Clerk SDK. Default Windows location: `%LOCALAPPDATA%\Android\Sdk` |
+| Gradle | — | Not needed globally; the repo commits the **Gradle 8.13 wrapper** (AGP 8.11, Kotlin 2.4) |
 
 ## One-time setup
 
@@ -27,6 +27,29 @@ No Android Studio required. Everything below runs from a shell.
    ```bash
    export JAVA_HOME="C:/Program Files/Eclipse Adoptium/jdk-17.0.17.10-hotspot"
    ```
+
+## Clerk sign-in (optional)
+
+To enable real Clerk authentication, add your publishable key to
+`android/local.properties`:
+
+```properties
+clerk.publishableKey=pk_test_...
+```
+
+Rebuild afterwards (the key lands in `BuildConfig`). Without a key the app
+compiles and runs normally with demo mode and the Settings dev sign-in; the
+Clerk account section simply doesn't appear.
+
+Backend side, set in `backend/.env` to verify tokens instead of trusting the
+`clerk-user-id` header:
+
+```properties
+CLERK_JWT_ISSUER=https://your-app.clerk.accounts.dev
+CLERK_REQUIRE_JWT=false   # true to reject unverified identity claims
+```
+
+The backend gained a `pyjwt[crypto]` dependency — run `poetry lock && poetry install`.
 
 ## Build
 

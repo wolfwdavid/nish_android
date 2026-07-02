@@ -16,14 +16,16 @@ This repository contains three peers:
 |---|---|---|---|
 | ![Explore](docs/screenshots/explore.png) | ![Journal](docs/screenshots/journal-timeline.png) | ![Project](docs/screenshots/project-detail.png) | ![Settings](docs/screenshots/settings.png) |
 
-A read-first MVP that mirrors the web app's mobile layout (bottom navigation, dark burnt-orange theme):
+Mirrors the web app's mobile layout (bottom navigation, dark burnt-orange theme):
 
 - **Explore** — the public feed of build events (journal entries, live-project launches, deployments, milestones)
-- **Projects** — cursor-paginated project cards; detail view with Overview / Gallery / Updates / Comments tabs and threaded comments
-- **Live** — in-progress builds with progress bars and a day-numbered **build journal timeline**: entry-type badges, code snippets, media grids, problem→solution blocks
+- **Projects** — cursor-paginated project cards; detail view with Overview / Gallery / Updates / Comments tabs, **star & bookmark toggles**, and a **threaded comment composer with voting**
+- **Live** — in-progress builds with progress bars and a day-numbered **build journal timeline** (entry-type badges, code snippets, media grids, problem→solution blocks) with **likes** and an **owner-only session composer**
 - **Search** — debounced builder search
-- **Profile** — public profiles with stats, current build, and links
-- **Settings** — demo mode toggle, backend base URL, dev sign-in
+- **Profile** — public profiles with stats, current build, links, and **follow/unfollow**
+- **Settings** — demo mode toggle, backend base URL, dev sign-in, and **Clerk account sign-in/out** (when a publishable key is configured)
+
+**Authentication**: the official Clerk Android SDK drives email+password sign-in (key-gated via `local.properties`), and the backend gained optional JWT verification middleware so tokens are actually checked — see [docs/API.md](docs/API.md).
 
 ### Demo mode (default)
 
