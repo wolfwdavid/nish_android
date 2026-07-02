@@ -1,0 +1,39 @@
+{
+  "id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+  "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+  "user": {
+    "id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "username": "arjunships",
+    "display_name": "Arjun Patel",
+    "avatar_url": "https://i.pravatar.cc/150?img=56",
+    "current_build": "Rust game engine"
+  },
+  "title": "Rust Game Engine",
+  "slug": "rust-game-engine",
+  "goal": "2D game engine with hot-reload",
+  "description": "A small 2D game engine in Rust focused on iteration speed: hot-reloadable game logic, sprite batching on wgpu, and a tiny ECS.",
+  "github_url": "https://github.com/arjunships/rust-game-engine",
+  "live_url": null,
+  "demo_video_url": null,
+  "thumbnail_url": "https://picsum.photos/seed/rust-game-engine-1/800/450",
+  "gallery_urls": [],
+  "tech_stack": [
+    "Rust",
+    "wgpu",
+    "winit",
+    "hot-lib-reloader"
+  ],
+  "progress_percentage": 30,
+  "current_status": "Sprite batcher renders 10k quads at 144fps, hot-reload survives struct layout changes now",
+  "current_goal": "Playable pong demo built entirely on the engine by end of July",
+  "status": "active",
+  "category": "systems",
+  "is_public": true,
+  "is_featured": false,
+  "views_count": 947,
+  "journal_count": 5,
+  "days_count": 25,
+  "completed_at": null,
+  "created_at": "2026-06-05T07:30:00",
+  "updated_at": "2026-06-29T21:10:00"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+  "clerk_user_id": "user_demo_nishchal",
+  "username": "nishchal",
+  "display_name": "Nishchal Rai",
+  "email": "nishchal@example.dev",
+  "bio": "Android dev from Kathmandu building DevManiac in public. Kotlin by day, Rust CLI tools by night.",
+  "avatar_url": "https://i.pravatar.cc/150?img=12",
+  "banner_url": "https://picsum.photos/seed/nishchal-banner-1/1200/300",
+  "github_url": "https://github.com/nishchal",
+  "linkedin_url": null,
+  "portfolio_url": null,
+  "instagram_url": null,
+  "reputation_score": 1840,
+  "followers_count": 412,
+  "following_count": 187,
+  "posts_count": 34,
+  "project_count": 2,
+  "location": "Kathmandu, Nepal",
+  "current_build": "DevManiac Android",
+  "joined_date": "March 2026"
+}

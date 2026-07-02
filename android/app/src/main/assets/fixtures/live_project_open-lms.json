@@ -1,0 +1,42 @@
+{
+  "id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+  "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+  "user": {
+    "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+    "username": "mayadev",
+    "display_name": "Maya Chen",
+    "avatar_url": "https://i.pravatar.cc/150?img=32",
+    "current_build": "Open LMS"
+  },
+  "title": "Open LMS",
+  "slug": "open-lms",
+  "goal": "Open-source LMS for community colleges",
+  "description": "A free, self-hostable learning management system aimed at community colleges that can't afford Canvas. Course authoring, gradebook, and SCORM import.",
+  "github_url": "https://github.com/mayadev/open-lms",
+  "live_url": "https://openlms-demo.fly.dev",
+  "demo_video_url": null,
+  "thumbnail_url": "https://picsum.photos/seed/open-lms-1/800/450",
+  "gallery_urls": [
+    "https://picsum.photos/seed/open-lms-2/800/450"
+  ],
+  "tech_stack": [
+    "Next.js",
+    "PostgreSQL",
+    "Drizzle ORM",
+    "Tailwind CSS",
+    "Docker"
+  ],
+  "progress_percentage": 70,
+  "current_status": "Gradebook CSV export shipped, now hardening the SCORM importer against malformed manifests",
+  "current_goal": "Pilot deployment with a real cohort at Centennial College in August",
+  "status": "active",
+  "category": "web",
+  "is_public": true,
+  "is_featured": false,
+  "views_count": 2371,
+  "journal_count": 8,
+  "days_count": 41,
+  "completed_at": null,
+  "created_at": "2026-05-21T14:05:00",
+  "updated_at": "2026-07-01T11:20:00"
+}

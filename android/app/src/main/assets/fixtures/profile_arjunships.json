@@ -1,0 +1,22 @@
+{
+  "id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+  "clerk_user_id": "user_demo_arjunships",
+  "username": "arjunships",
+  "display_name": "Arjun Patel",
+  "email": "arjunships@example.dev",
+  "bio": "Systems programmer in Pune. Currently deep in wgpu and dylib hot-reload land. I ship or I write about why I didn't.",
+  "avatar_url": "https://i.pravatar.cc/150?img=56",
+  "banner_url": null,
+  "github_url": "https://github.com/arjunships",
+  "linkedin_url": null,
+  "portfolio_url": null,
+  "instagram_url": null,
+  "reputation_score": 1520,
+  "followers_count": 356,
+  "following_count": 141,
+  "posts_count": 29,
+  "project_count": 2,
+  "location": "Pune, India",
+  "current_build": "Rust game engine",
+  "joined_date": "April 2026"
+}

@@ -1,0 +1,204 @@
+{
+  "items": [
+    {
+      "id": "7a8b9c0d-7777-4a8b-8c9d-6f7a8b9c0d1e",
+      "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "title": "Codegram Mobile",
+      "slug": "codegram-mobile",
+      "description": "The DevManiac Android client. Jetpack Compose throughout, offline-first feed with Room, Paging 3 for infinite scroll, and Clerk-backed auth against the FastAPI backend.",
+      "github_url": "https://github.com/nishchal/codegram-mobile",
+      "live_url": null,
+      "thumbnail_url": "https://picsum.photos/seed/codegram-mobile-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [
+        "https://picsum.photos/seed/codegram-mobile-2/800/450",
+        "https://picsum.photos/seed/codegram-mobile-3/800/450",
+        "https://picsum.photos/seed/codegram-mobile-4/800/450"
+      ],
+      "tech_stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Retrofit",
+        "Room",
+        "Paging 3",
+        "Material 3"
+      ],
+      "stars_count": 87,
+      "views_count": 1420,
+      "comments_count": 5,
+      "is_featured": true,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "nishchal",
+        "avatar_url": "https://i.pravatar.cc/150?img=12",
+        "location": "Kathmandu, Nepal"
+      },
+      "created_at": "2026-06-12T09:30:00",
+      "updated_at": "2026-06-30T19:00:00"
+    },
+    {
+      "id": "8b9c0d1e-8888-4b9c-9d0e-7a8b9c0d1e2f",
+      "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "title": "Pixel Planner",
+      "slug": "pixel-planner",
+      "description": "A weekly planner PWA that looks like a Game Boy screen. Drag tasks between days, earn pixel trophies for streaks, works fully offline via a service worker and IndexedDB.",
+      "github_url": "https://github.com/mayadev/pixel-planner",
+      "live_url": "https://pixel-planner.pages.dev",
+      "thumbnail_url": "https://picsum.photos/seed/pixel-planner-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [
+        "https://picsum.photos/seed/pixel-planner-2/800/450",
+        "https://picsum.photos/seed/pixel-planner-3/800/450"
+      ],
+      "tech_stack": [
+        "TypeScript",
+        "Svelte",
+        "Vite",
+        "IndexedDB",
+        "Workbox"
+      ],
+      "stars_count": 214,
+      "views_count": 3860,
+      "comments_count": 4,
+      "is_featured": false,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "mayadev",
+        "avatar_url": "https://i.pravatar.cc/150?img=32",
+        "location": "Toronto, Canada"
+      },
+      "created_at": "2026-05-08T11:45:00",
+      "updated_at": "2026-06-15T09:10:00"
+    },
+    {
+      "id": "9c0d1e2f-9999-4c0d-ae1f-8b9c0d1e2f3a",
+      "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+      "title": "Trailmap API",
+      "slug": "trailmap-api",
+      "description": "REST API for hiking trails in the Western Ghats: 2,400 trails with GPX tracks, elevation profiles, and seasonal difficulty ratings. Go + PostGIS, tile-friendly bbox queries.",
+      "github_url": "https://github.com/arjunships/trailmap-api",
+      "live_url": "https://api.trailmap.dev/v1/trails?limit=5",
+      "thumbnail_url": "https://picsum.photos/seed/trailmap-api-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [],
+      "tech_stack": [
+        "Go",
+        "PostgreSQL",
+        "PostGIS",
+        "Docker",
+        "Redis"
+      ],
+      "stars_count": 156,
+      "views_count": 2210,
+      "comments_count": 5,
+      "is_featured": false,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "arjunships",
+        "avatar_url": "https://i.pravatar.cc/150?img=56",
+        "location": "Pune, India"
+      },
+      "created_at": "2026-05-19T08:20:00",
+      "updated_at": "2026-06-26T17:35:00"
+    },
+    {
+      "id": "0d1e2f3a-aaaa-4d1e-8f2a-9c0d1e2f3a4b",
+      "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "title": "Devlog CLI",
+      "slug": "devlog-cli",
+      "description": "A terminal build-journal tool in Rust. `devlog add` drops a timestamped entry into a local SQLite db, `devlog week` renders a markdown digest, and `devlog push` syncs to DevManiac.",
+      "github_url": "https://github.com/nishchal/devlog-cli",
+      "live_url": null,
+      "thumbnail_url": "https://picsum.photos/seed/devlog-cli-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [],
+      "tech_stack": [
+        "Rust",
+        "SQLite",
+        "clap",
+        "ratatui"
+      ],
+      "stars_count": 132,
+      "views_count": 1980,
+      "comments_count": 3,
+      "is_featured": false,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "nishchal",
+        "avatar_url": "https://i.pravatar.cc/150?img=12",
+        "location": "Kathmandu, Nepal"
+      },
+      "created_at": "2026-05-11T15:00:00",
+      "updated_at": "2026-06-08T12:25:00"
+    },
+    {
+      "id": "1e2f3a4b-bbbb-4e2f-9a3b-0d1e2f3a4b5c",
+      "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "title": "Notes Sync",
+      "slug": "notes-sync",
+      "description": "A CRDT sync engine for plain-text notes. Yjs-compatible update format, delta compression over WebSocket, and a conflict test harness that replays 10k concurrent edits.",
+      "github_url": "https://github.com/mayadev/notes-sync",
+      "live_url": null,
+      "thumbnail_url": "https://picsum.photos/seed/notes-sync-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [],
+      "tech_stack": [
+        "TypeScript",
+        "Yjs",
+        "WebSocket",
+        "Node.js",
+        "Vitest"
+      ],
+      "stars_count": 341,
+      "views_count": 5240,
+      "comments_count": 3,
+      "is_featured": true,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "mayadev",
+        "avatar_url": "https://i.pravatar.cc/150?img=32",
+        "location": "Toronto, Canada"
+      },
+      "created_at": "2026-05-03T09:55:00",
+      "updated_at": "2026-06-29T14:50:00"
+    },
+    {
+      "id": "2f3a4b5c-cccc-4f3a-8b4c-1e2f3a4b5c6d",
+      "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+      "title": "Focus Timer",
+      "slug": "focus-timer",
+      "description": "A Pomodoro TUI with per-project stats. Vim-style keybindings, tmux status-line integration, and a heatmap of your focused hours rendered in braille characters.",
+      "github_url": "https://github.com/arjunships/focus-timer",
+      "live_url": null,
+      "thumbnail_url": "https://picsum.photos/seed/focus-timer-1/800/450",
+      "demo_video_url": null,
+      "gallery_urls": [],
+      "tech_stack": [
+        "Rust",
+        "ratatui",
+        "crossterm",
+        "SQLite"
+      ],
+      "stars_count": 98,
+      "views_count": 1130,
+      "comments_count": 3,
+      "is_featured": false,
+      "is_starred": false,
+      "is_bookmarked": false,
+      "user": {
+        "username": "arjunships",
+        "avatar_url": "https://i.pravatar.cc/150?img=56",
+        "location": "Pune, India"
+      },
+      "created_at": "2026-05-25T19:40:00",
+      "updated_at": "2026-06-18T20:05:00"
+    }
+  ],
+  "next_cursor": null,
+  "has_more": false
+}

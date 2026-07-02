@@ -1,0 +1,117 @@
+[
+  {
+    "id": "e5f6a7b8-4401-4a2b-8c3d-4d5e6f7a8b01",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 1,
+    "content": "Kicked off the DevManiac Android client. Empty Compose scaffold, Hilt wired, Retrofit pointed at staging. First milestone is the read-only feed.",
+    "entry_type": "announcement",
+    "media_urls": [],
+    "code_snippets": [],
+    "problem_solutions": [],
+    "progress_percentage": 5,
+    "likes_count": 18,
+    "comments_count": 3,
+    "created_at": "2026-06-12T10:00:00",
+    "updated_at": "2026-06-12T10:00:00"
+  },
+  {
+    "id": "e5f6a7b8-4402-4b3c-9d4e-4d5e6f7a8b02",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 4,
+    "content": "Settled the module layout: :app, :core:network, :core:designsystem, :feature:feed. Kept it boring on purpose — four modules is enough until build times say otherwise.",
+    "entry_type": "architecture",
+    "media_urls": [],
+    "code_snippets": [
+      "// core/network/ApiModule.kt\n@Provides @Singleton\nfun provideJson(): Json = Json {\n    ignoreUnknownKeys = true\n    coerceInputValues = true\n}"
+    ],
+    "problem_solutions": [],
+    "progress_percentage": 15,
+    "likes_count": 22,
+    "comments_count": 4,
+    "created_at": "2026-06-15T20:30:00",
+    "updated_at": "2026-06-15T20:30:00"
+  },
+  {
+    "id": "e5f6a7b8-4403-4c4d-ae5f-4d5e6f7a8b03",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 8,
+    "content": "Feed screen renders real staging data. Shimmer placeholders, pull-to-refresh, and the event cards match the web design closely enough that I had to double-check which one I was looking at.",
+    "entry_type": "progress",
+    "media_urls": [
+      "https://picsum.photos/seed/devmaniac-android-day8-1/800/450",
+      "https://picsum.photos/seed/devmaniac-android-day8-2/800/450"
+    ],
+    "code_snippets": [],
+    "problem_solutions": [],
+    "progress_percentage": 25,
+    "likes_count": 35,
+    "comments_count": 6,
+    "created_at": "2026-06-19T17:45:00",
+    "updated_at": "2026-06-19T17:45:00"
+  },
+  {
+    "id": "e5f6a7b8-4404-4d5e-8f6a-4d5e6f7a8b04",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 12,
+    "content": "Replaced hand-rolled cursor pagination with Paging 3. Deleted ~200 lines and fixed the duplicate-item flash on refresh in the same move.",
+    "entry_type": "progress",
+    "media_urls": [],
+    "code_snippets": [
+      "val feed = Pager(PagingConfig(pageSize = 20)) {\n    FeedPagingSource(api)\n}.flow.cachedIn(viewModelScope)"
+    ],
+    "problem_solutions": [
+      {
+        "problem": "Items flashed duplicates when a refresh landed mid-scroll because the old cursor list and new page briefly overlapped.",
+        "solution": "Moved to Paging 3 with a keyed PagingSource; DiffUtil keys on event id so overlapping pages reconcile instead of double-rendering."
+      }
+    ],
+    "progress_percentage": 35,
+    "likes_count": 29,
+    "comments_count": 5,
+    "created_at": "2026-06-23T16:00:00",
+    "updated_at": "2026-06-23T16:00:00"
+  },
+  {
+    "id": "e5f6a7b8-4405-4e6f-9a7b-4d5e6f7a8b05",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 15,
+    "content": "Lost half a day to a serialization crash: the backend sends event_metadata as an arbitrary JSON object and my DTO had it as Map<String, String>. One nested object in production data and the whole feed page failed to parse.",
+    "entry_type": "bugfix",
+    "media_urls": [],
+    "code_snippets": [],
+    "problem_solutions": [
+      {
+        "problem": "kotlinx.serialization threw on event_metadata because nested objects don't fit Map<String, String>.",
+        "solution": "Typed the field as JsonObject and let each card reader pull out the keys it knows about. Unknown shapes now degrade gracefully instead of killing the page."
+      }
+    ],
+    "progress_percentage": 40,
+    "likes_count": 31,
+    "comments_count": 7,
+    "created_at": "2026-06-27T22:10:00",
+    "updated_at": "2026-06-27T22:10:00"
+  },
+  {
+    "id": "e5f6a7b8-4406-4f7a-8b8c-4d5e6f7a8b06",
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "day_number": 18,
+    "content": "Milestone: comments are live. Two-level threading, optimistic upvotes, and reply composer with @-mention completion. That's the last read-write surface before I start the profile screen.",
+    "entry_type": "milestone",
+    "media_urls": [
+      "https://picsum.photos/seed/devmaniac-android-day18-1/800/450"
+    ],
+    "code_snippets": [],
+    "problem_solutions": [],
+    "progress_percentage": 45,
+    "likes_count": 44,
+    "comments_count": 9,
+    "created_at": "2026-06-30T18:40:00",
+    "updated_at": "2026-06-30T18:40:00"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+  "clerk_user_id": "user_demo_mayadev",
+  "username": "mayadev",
+  "display_name": "Maya Chen",
+  "email": "mayadev@example.dev",
+  "bio": "Full-stack dev in Toronto. Building open-source education tools because course software shouldn't cost more than tuition.",
+  "avatar_url": "https://i.pravatar.cc/150?img=32",
+  "banner_url": "https://picsum.photos/seed/mayadev-banner-1/1200/300",
+  "github_url": "https://github.com/mayadev",
+  "linkedin_url": null,
+  "portfolio_url": null,
+  "instagram_url": null,
+  "reputation_score": 2960,
+  "followers_count": 738,
+  "following_count": 203,
+  "posts_count": 51,
+  "project_count": 2,
+  "location": "Toronto, Canada",
+  "current_build": "Open LMS",
+  "joined_date": "March 2026"
+}

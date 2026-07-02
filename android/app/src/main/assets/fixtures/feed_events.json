@@ -1,0 +1,317 @@
+[
+  {
+    "id": "a1b2c3d4-01e1-4f2a-9b3c-d4e5f6a7b801",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "user": {
+      "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "username": "nishchal",
+      "display_name": "Nishchal Rai",
+      "avatar_url": "https://i.pravatar.cc/150?img=12",
+      "current_build": "DevManiac Android"
+    },
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "live_project": {
+      "id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+      "title": "DevManiac Android",
+      "slug": "devmaniac-android",
+      "description": "Native Android client for the DevManiac build-in-public network. Compose UI, offline-first feed cache, and journal publishing from your phone.",
+      "current_status": "Wiring the project detail screen to the paginated comments endpoint",
+      "progress_percentage": 45,
+      "status": "active",
+      "tech_stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Retrofit",
+        "Material 3"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/devmaniac-android-1/800/450"
+    },
+    "event_type": "journal_published",
+    "content": "Day 18: comments endpoint is live in the app. Two-level threading was the tricky part — replies never nest past depth 1 on the backend, so I flattened the DTO instead of recursing.",
+    "event_metadata": {
+      "day_number": 18,
+      "progress_percentage": 45
+    },
+    "likes_count": 34,
+    "comments_count": 6,
+    "is_public": true,
+    "created_at": "2026-06-30T18:45:00"
+  },
+  {
+    "id": "a1b2c3d4-02e2-4a3b-8c4d-e5f6a7b8c902",
+    "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+    "user": {
+      "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "username": "mayadev",
+      "display_name": "Maya Chen",
+      "avatar_url": "https://i.pravatar.cc/150?img=32",
+      "current_build": "Open LMS"
+    },
+    "live_project_id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+    "live_project": {
+      "id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+      "title": "Open LMS",
+      "slug": "open-lms",
+      "description": "A free, self-hostable learning management system aimed at community colleges that can't afford Canvas. Course authoring, gradebook, and SCORM import.",
+      "current_status": "Gradebook CSV export shipped, now hardening the SCORM importer against malformed manifests",
+      "progress_percentage": 70,
+      "status": "active",
+      "tech_stack": [
+        "Next.js",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/open-lms-1/800/450"
+    },
+    "event_type": "deployment",
+    "content": "Open LMS demo instance is up on Fly.io. Postgres on a 1GB volume, Litestream backups to R2, and the whole thing costs under $6/month. Link in the project.",
+    "event_metadata": {
+      "progress_percentage": 70,
+      "url": "https://openlms-demo.fly.dev"
+    },
+    "likes_count": 58,
+    "comments_count": 11,
+    "is_public": true,
+    "created_at": "2026-06-27T20:12:00"
+  },
+  {
+    "id": "a1b2c3d4-03e3-4b4c-9d5e-f6a7b8c9da03",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "user": {
+      "id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+      "username": "arjunships",
+      "display_name": "Arjun Patel",
+      "avatar_url": "https://i.pravatar.cc/150?img=56",
+      "current_build": "Rust game engine"
+    },
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "live_project": {
+      "id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+      "title": "Rust Game Engine",
+      "slug": "rust-game-engine",
+      "description": "A small 2D game engine in Rust focused on iteration speed: hot-reloadable game logic, sprite batching on wgpu, and a tiny ECS.",
+      "current_status": "Sprite batcher renders 10k quads at 144fps, hot-reload survives struct layout changes now",
+      "progress_percentage": 30,
+      "status": "active",
+      "tech_stack": [
+        "Rust",
+        "wgpu",
+        "winit",
+        "hot-lib-reloader"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/rust-game-engine-1/800/450"
+    },
+    "event_type": "journal_published",
+    "content": "Day 23: hot-reload finally survives struct layout changes. Serializing world state through a stable ABI boundary before swapping the dylib did the trick.",
+    "event_metadata": {
+      "day_number": 23,
+      "progress_percentage": 30
+    },
+    "likes_count": 41,
+    "comments_count": 9,
+    "is_public": true,
+    "created_at": "2026-06-29T21:15:00"
+  },
+  {
+    "id": "a1b2c3d4-04e4-4c5d-ae6f-a7b8c9daeb04",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "user": {
+      "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "username": "nishchal",
+      "display_name": "Nishchal Rai",
+      "avatar_url": "https://i.pravatar.cc/150?img=12",
+      "current_build": "DevManiac Android"
+    },
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "live_project": {
+      "id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+      "title": "DevManiac Android",
+      "slug": "devmaniac-android",
+      "description": "Native Android client for the DevManiac build-in-public network. Compose UI, offline-first feed cache, and journal publishing from your phone.",
+      "current_status": "Wiring the project detail screen to the paginated comments endpoint",
+      "progress_percentage": 45,
+      "status": "active",
+      "tech_stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Retrofit",
+        "Material 3"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/devmaniac-android-1/800/450"
+    },
+    "event_type": "journal_published",
+    "content": "Day 12: swapped the hand-rolled feed pagination for Paging 3. Deleted 200 lines of cursor bookkeeping and the scroll jank on refresh is gone.",
+    "event_metadata": {
+      "day_number": 12,
+      "progress_percentage": 35
+    },
+    "likes_count": 27,
+    "comments_count": 4,
+    "is_public": true,
+    "created_at": "2026-06-24T16:03:00"
+  },
+  {
+    "id": "a1b2c3d4-05e5-4d6e-8f7a-b8c9daebfc05",
+    "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+    "user": {
+      "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "username": "mayadev",
+      "display_name": "Maya Chen",
+      "avatar_url": "https://i.pravatar.cc/150?img=32",
+      "current_build": "Open LMS"
+    },
+    "live_project_id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+    "live_project": {
+      "id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+      "title": "Open LMS",
+      "slug": "open-lms",
+      "description": "A free, self-hostable learning management system aimed at community colleges that can't afford Canvas. Course authoring, gradebook, and SCORM import.",
+      "current_status": "Gradebook CSV export shipped, now hardening the SCORM importer against malformed manifests",
+      "progress_percentage": 70,
+      "status": "active",
+      "tech_stack": [
+        "Next.js",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/open-lms-1/800/450"
+    },
+    "event_type": "journal_published",
+    "content": "Day 33: the SCORM importer now handles the three most common manifest quirks I found in real course exports. Wrote a fuzzer that mutates imsmanifest.xml and it caught two more panics.",
+    "event_metadata": {
+      "day_number": 33,
+      "progress_percentage": 66
+    },
+    "likes_count": 45,
+    "comments_count": 8,
+    "is_public": true,
+    "created_at": "2026-06-23T13:40:00"
+  },
+  {
+    "id": "a1b2c3d4-06e6-4e7f-9a8b-c9daebfc0d06",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "user": {
+      "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "username": "nishchal",
+      "display_name": "Nishchal Rai",
+      "avatar_url": "https://i.pravatar.cc/150?img=12",
+      "current_build": "DevManiac Android"
+    },
+    "live_project_id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "live_project": {
+      "id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+      "title": "DevManiac Android",
+      "slug": "devmaniac-android",
+      "description": "Native Android client for the DevManiac build-in-public network. Compose UI, offline-first feed cache, and journal publishing from your phone.",
+      "current_status": "Wiring the project detail screen to the paginated comments endpoint",
+      "progress_percentage": 45,
+      "status": "active",
+      "tech_stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Retrofit",
+        "Material 3"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/devmaniac-android-1/800/450"
+    },
+    "event_type": "live_project_created",
+    "content": "Starting a new build: a native Android client for DevManiac itself. Kotlin + Compose, Retrofit against the existing FastAPI backend. Goal is feature parity with the mobile web feed in 6 weeks.",
+    "event_metadata": {
+      "tech_stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Retrofit",
+        "Material 3"
+      ]
+    },
+    "likes_count": 62,
+    "comments_count": 14,
+    "is_public": true,
+    "created_at": "2026-06-12T09:20:00"
+  },
+  {
+    "id": "a1b2c3d4-07e7-4f8a-8b9c-daebfc0d1e07",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "user": {
+      "id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+      "username": "arjunships",
+      "display_name": "Arjun Patel",
+      "avatar_url": "https://i.pravatar.cc/150?img=56",
+      "current_build": "Rust game engine"
+    },
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "live_project": {
+      "id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+      "title": "Rust Game Engine",
+      "slug": "rust-game-engine",
+      "description": "A small 2D game engine in Rust focused on iteration speed: hot-reloadable game logic, sprite batching on wgpu, and a tiny ECS.",
+      "current_status": "Sprite batcher renders 10k quads at 144fps, hot-reload survives struct layout changes now",
+      "progress_percentage": 30,
+      "status": "active",
+      "tech_stack": [
+        "Rust",
+        "wgpu",
+        "winit",
+        "hot-lib-reloader"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/rust-game-engine-1/800/450"
+    },
+    "event_type": "live_project_created",
+    "content": "New build: a 2D game engine in Rust where the whole point is iteration speed. If I can't change gameplay code and see it in under a second, the engine has failed.",
+    "event_metadata": {
+      "tech_stack": [
+        "Rust",
+        "wgpu",
+        "winit",
+        "hot-lib-reloader"
+      ]
+    },
+    "likes_count": 38,
+    "comments_count": 7,
+    "is_public": true,
+    "created_at": "2026-06-05T07:35:00"
+  },
+  {
+    "id": "a1b2c3d4-08e8-4a9b-9cad-ebfc0d1e2f08",
+    "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+    "user": {
+      "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "username": "mayadev",
+      "display_name": "Maya Chen",
+      "avatar_url": "https://i.pravatar.cc/150?img=32",
+      "current_build": "Open LMS"
+    },
+    "live_project_id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+    "live_project": {
+      "id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+      "title": "Open LMS",
+      "slug": "open-lms",
+      "description": "A free, self-hostable learning management system aimed at community colleges that can't afford Canvas. Course authoring, gradebook, and SCORM import.",
+      "current_status": "Gradebook CSV export shipped, now hardening the SCORM importer against malformed manifests",
+      "progress_percentage": 70,
+      "status": "active",
+      "tech_stack": [
+        "Next.js",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "thumbnail_url": "https://picsum.photos/seed/open-lms-1/800/450"
+    },
+    "event_type": "milestone",
+    "content": "Open LMS crossed 500 GitHub stars this week. Two community college instructors reached out about piloting it in the fall semester — this is why it's open source.",
+    "event_metadata": {
+      "milestone": "500 GitHub stars",
+      "progress_percentage": 70
+    },
+    "likes_count": 94,
+    "comments_count": 21,
+    "is_public": true,
+    "created_at": "2026-06-19T10:05:00"
+  }
+]

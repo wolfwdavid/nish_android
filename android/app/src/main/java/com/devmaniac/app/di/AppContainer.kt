@@ -4,6 +4,7 @@ import android.content.Context
 import com.devmaniac.app.data.remote.ApiService
 import com.devmaniac.app.data.remote.AuthInterceptor
 import com.devmaniac.app.data.repo.DevManiacRepository
+import com.devmaniac.app.data.repo.FixtureRepository
 import com.devmaniac.app.data.repo.NetworkRepository
 import com.devmaniac.app.data.settings.AppSettings
 import com.devmaniac.app.data.settings.SettingsSnapshot
@@ -48,10 +49,14 @@ class AppContainer(private val context: Context) {
     }
 
     private fun buildRepository(snapshot: SettingsSnapshot): DevManiacRepository =
-        NetworkRepository(
-            api = buildApi(snapshot),
-            clerkUserId = { snapshot.devClerkUserId },
-        )
+        if (snapshot.demoMode) {
+            FixtureRepository(context, json)
+        } else {
+            NetworkRepository(
+                api = buildApi(snapshot),
+                clerkUserId = { snapshot.devClerkUserId },
+            )
+        }
 
     private fun buildApi(snapshot: SettingsSnapshot): ApiService {
         val client = OkHttpClient.Builder()

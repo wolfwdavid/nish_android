@@ -1,0 +1,42 @@
+{
+  "id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+  "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+  "user": {
+    "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "username": "nishchal",
+    "display_name": "Nishchal Rai",
+    "avatar_url": "https://i.pravatar.cc/150?img=12",
+    "current_build": "DevManiac Android"
+  },
+  "title": "DevManiac Android",
+  "slug": "devmaniac-android",
+  "goal": "Ship a native Android client for DevManiac",
+  "description": "Native Android client for the DevManiac build-in-public network. Compose UI, offline-first feed cache, and journal publishing from your phone.",
+  "github_url": "https://github.com/nishchal/devmaniac-android",
+  "live_url": null,
+  "demo_video_url": null,
+  "thumbnail_url": "https://picsum.photos/seed/devmaniac-android-1/800/450",
+  "gallery_urls": [
+    "https://picsum.photos/seed/devmaniac-android-2/800/450",
+    "https://picsum.photos/seed/devmaniac-android-3/800/450"
+  ],
+  "tech_stack": [
+    "Kotlin",
+    "Jetpack Compose",
+    "Retrofit",
+    "Material 3"
+  ],
+  "progress_percentage": 45,
+  "current_status": "Wiring the project detail screen to the paginated comments endpoint",
+  "current_goal": "Feed, projects, and profile screens working against the staging API by mid-July",
+  "status": "active",
+  "category": "mobile",
+  "is_public": true,
+  "is_featured": true,
+  "views_count": 1284,
+  "journal_count": 6,
+  "days_count": 18,
+  "completed_at": null,
+  "created_at": "2026-06-12T09:15:00",
+  "updated_at": "2026-06-30T18:42:00"
+}

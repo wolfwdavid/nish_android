@@ -1,0 +1,37 @@
+{
+  "id": "7a8b9c0d-7777-4a8b-8c9d-6f7a8b9c0d1e",
+  "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+  "title": "Codegram Mobile",
+  "slug": "codegram-mobile",
+  "description": "The DevManiac Android client. Jetpack Compose throughout, offline-first feed with Room, Paging 3 for infinite scroll, and Clerk-backed auth against the FastAPI backend.",
+  "github_url": "https://github.com/nishchal/codegram-mobile",
+  "live_url": null,
+  "thumbnail_url": "https://picsum.photos/seed/codegram-mobile-1/800/450",
+  "demo_video_url": null,
+  "gallery_urls": [
+    "https://picsum.photos/seed/codegram-mobile-2/800/450",
+    "https://picsum.photos/seed/codegram-mobile-3/800/450",
+    "https://picsum.photos/seed/codegram-mobile-4/800/450"
+  ],
+  "tech_stack": [
+    "Kotlin",
+    "Jetpack Compose",
+    "Retrofit",
+    "Room",
+    "Paging 3",
+    "Material 3"
+  ],
+  "stars_count": 87,
+  "views_count": 1420,
+  "comments_count": 5,
+  "is_featured": true,
+  "is_starred": false,
+  "is_bookmarked": false,
+  "user": {
+    "username": "nishchal",
+    "avatar_url": "https://i.pravatar.cc/150?img=12",
+    "location": "Kathmandu, Nepal"
+  },
+  "created_at": "2026-06-12T09:30:00",
+  "updated_at": "2026-06-30T19:00:00"
+}

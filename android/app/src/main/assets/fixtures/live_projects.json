@@ -1,0 +1,125 @@
+[
+  {
+    "id": "4d5e6f7a-4444-4d5e-bf6a-3c4d5e6f7a8b",
+    "user_id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+    "user": {
+      "id": "1a2b3c4d-1111-4a2b-8c3d-0f1e2d3c4b5a",
+      "username": "nishchal",
+      "display_name": "Nishchal Rai",
+      "avatar_url": "https://i.pravatar.cc/150?img=12",
+      "current_build": "DevManiac Android"
+    },
+    "title": "DevManiac Android",
+    "slug": "devmaniac-android",
+    "goal": "Ship a native Android client for DevManiac",
+    "description": "Native Android client for the DevManiac build-in-public network. Compose UI, offline-first feed cache, and journal publishing from your phone.",
+    "github_url": "https://github.com/nishchal/devmaniac-android",
+    "live_url": null,
+    "demo_video_url": null,
+    "thumbnail_url": "https://picsum.photos/seed/devmaniac-android-1/800/450",
+    "gallery_urls": [
+      "https://picsum.photos/seed/devmaniac-android-2/800/450",
+      "https://picsum.photos/seed/devmaniac-android-3/800/450"
+    ],
+    "tech_stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Retrofit",
+      "Material 3"
+    ],
+    "progress_percentage": 45,
+    "current_status": "Wiring the project detail screen to the paginated comments endpoint",
+    "current_goal": "Feed, projects, and profile screens working against the staging API by mid-July",
+    "status": "active",
+    "category": "mobile",
+    "is_public": true,
+    "is_featured": true,
+    "views_count": 1284,
+    "journal_count": 6,
+    "days_count": 18,
+    "completed_at": null,
+    "created_at": "2026-06-12T09:15:00",
+    "updated_at": "2026-06-30T18:42:00"
+  },
+  {
+    "id": "5e6f7a8b-5555-4e6f-8a7b-4d5e6f7a8b9c",
+    "user_id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+    "user": {
+      "id": "2b3c4d5e-2222-4b3c-9d4e-1a2b3c4d5e6f",
+      "username": "mayadev",
+      "display_name": "Maya Chen",
+      "avatar_url": "https://i.pravatar.cc/150?img=32",
+      "current_build": "Open LMS"
+    },
+    "title": "Open LMS",
+    "slug": "open-lms",
+    "goal": "Open-source LMS for community colleges",
+    "description": "A free, self-hostable learning management system aimed at community colleges that can't afford Canvas. Course authoring, gradebook, and SCORM import.",
+    "github_url": "https://github.com/mayadev/open-lms",
+    "live_url": "https://openlms-demo.fly.dev",
+    "demo_video_url": null,
+    "thumbnail_url": "https://picsum.photos/seed/open-lms-1/800/450",
+    "gallery_urls": [
+      "https://picsum.photos/seed/open-lms-2/800/450"
+    ],
+    "tech_stack": [
+      "Next.js",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Tailwind CSS",
+      "Docker"
+    ],
+    "progress_percentage": 70,
+    "current_status": "Gradebook CSV export shipped, now hardening the SCORM importer against malformed manifests",
+    "current_goal": "Pilot deployment with a real cohort at Centennial College in August",
+    "status": "active",
+    "category": "web",
+    "is_public": true,
+    "is_featured": false,
+    "views_count": 2371,
+    "journal_count": 8,
+    "days_count": 41,
+    "completed_at": null,
+    "created_at": "2026-05-21T14:05:00",
+    "updated_at": "2026-07-01T11:20:00"
+  },
+  {
+    "id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "user": {
+      "id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+      "username": "arjunships",
+      "display_name": "Arjun Patel",
+      "avatar_url": "https://i.pravatar.cc/150?img=56",
+      "current_build": "Rust game engine"
+    },
+    "title": "Rust Game Engine",
+    "slug": "rust-game-engine",
+    "goal": "2D game engine with hot-reload",
+    "description": "A small 2D game engine in Rust focused on iteration speed: hot-reloadable game logic, sprite batching on wgpu, and a tiny ECS.",
+    "github_url": "https://github.com/arjunships/rust-game-engine",
+    "live_url": null,
+    "demo_video_url": null,
+    "thumbnail_url": "https://picsum.photos/seed/rust-game-engine-1/800/450",
+    "gallery_urls": [],
+    "tech_stack": [
+      "Rust",
+      "wgpu",
+      "winit",
+      "hot-lib-reloader"
+    ],
+    "progress_percentage": 30,
+    "current_status": "Sprite batcher renders 10k quads at 144fps, hot-reload survives struct layout changes now",
+    "current_goal": "Playable pong demo built entirely on the engine by end of July",
+    "status": "active",
+    "category": "systems",
+    "is_public": true,
+    "is_featured": false,
+    "views_count": 947,
+    "journal_count": 5,
+    "days_count": 25,
+    "completed_at": null,
+    "created_at": "2026-06-05T07:30:00",
+    "updated_at": "2026-06-29T21:10:00"
+  }
+]

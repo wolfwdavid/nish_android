@@ -1,0 +1,101 @@
+[
+  {
+    "id": "a7b8c9da-6601-4a2b-8c3d-6f7a8b9c0d01",
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "day_number": 1,
+    "content": "Starting the engine. Constraint that drives everything: change gameplay code, see the result in under one second, never lose game state. If a decision fights that, the decision loses.",
+    "entry_type": "announcement",
+    "media_urls": [],
+    "code_snippets": [],
+    "problem_solutions": [],
+    "progress_percentage": 2,
+    "likes_count": 21,
+    "comments_count": 5,
+    "created_at": "2026-06-05T08:00:00",
+    "updated_at": "2026-06-05T08:00:00"
+  },
+  {
+    "id": "a7b8c9da-6602-4b3c-9d4e-6f7a8b9c0d02",
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "day_number": 6,
+    "content": "wgpu sprite batcher working: one draw call per texture atlas, instanced quads, 10k sprites at 144fps on my mid-range laptop GPU. Plenty of headroom for a 2D engine.",
+    "entry_type": "progress",
+    "media_urls": [
+      "https://picsum.photos/seed/rust-game-engine-day6-1/800/450"
+    ],
+    "code_snippets": [
+      "let instances: Vec<SpriteInstance> = world\n    .query::<(&Transform, &Sprite)>()\n    .iter()\n    .map(SpriteInstance::from)\n    .collect();\nqueue.write_buffer(&self.instance_buf, 0, bytemuck::cast_slice(&instances));"
+    ],
+    "problem_solutions": [],
+    "progress_percentage": 12,
+    "likes_count": 27,
+    "comments_count": 6,
+    "created_at": "2026-06-10T21:15:00",
+    "updated_at": "2026-06-10T21:15:00"
+  },
+  {
+    "id": "a7b8c9da-6603-4c4d-ae5f-6f7a8b9c0d03",
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "day_number": 12,
+    "content": "Hot-reload attempt #1 failed hard. Swapping the game dylib worked until any struct in the game state changed layout — then instant UB and a crash with no backtrace. Learned more about ABI stability this week than in the last two years.",
+    "entry_type": "failure",
+    "media_urls": [],
+    "code_snippets": [],
+    "problem_solutions": [
+      {
+        "problem": "Reloading the game dylib after a struct layout change reinterpreted old memory with the new layout — undefined behavior, random crashes.",
+        "solution": "Serialize world state to a versioned byte format before unload, deserialize after reload. Layout changes now migrate through serde instead of aliasing raw memory."
+      }
+    ],
+    "progress_percentage": 18,
+    "likes_count": 45,
+    "comments_count": 11,
+    "created_at": "2026-06-16T23:50:00",
+    "updated_at": "2026-06-16T23:50:00"
+  },
+  {
+    "id": "a7b8c9da-6604-4d5e-8f6a-6f7a8b9c0d04",
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "day_number": 19,
+    "content": "Fixed the frame-pacing stutter: I was polling winit events with the wrong control flow and occasionally presenting two frames inside one vsync interval. ControlFlow::Poll plus a fixed-timestep accumulator smoothed it out completely.",
+    "entry_type": "bugfix",
+    "media_urls": [],
+    "code_snippets": [
+      "const DT: f32 = 1.0 / 120.0;\naccumulator += frame_time.min(0.25);\nwhile accumulator >= DT {\n    world.fixed_update(DT);\n    accumulator -= DT;\n}"
+    ],
+    "problem_solutions": [
+      {
+        "problem": "Frames occasionally presented twice inside one vsync interval, causing a visible stutter every few seconds.",
+        "solution": "Switched winit to ControlFlow::Poll and decoupled simulation from rendering with a fixed-timestep accumulator."
+      }
+    ],
+    "progress_percentage": 24,
+    "likes_count": 30,
+    "comments_count": 4,
+    "created_at": "2026-06-23T18:25:00",
+    "updated_at": "2026-06-23T18:25:00"
+  },
+  {
+    "id": "a7b8c9da-6605-4e6f-9a7b-6f7a8b9c0d05",
+    "live_project_id": "6f7a8b9c-6666-4f7a-9b8c-5e6f7a8b9c0d",
+    "user_id": "3c4d5e6f-3333-4c5d-ae5f-2b3c4d5e6f7a",
+    "day_number": 23,
+    "content": "Milestone: hot-reload survives struct layout changes, keeps entity state, and round-trips in about 300ms. Recorded a clip of me retuning jump physics live while the ball keeps bouncing.",
+    "entry_type": "milestone",
+    "media_urls": [
+      "https://picsum.photos/seed/rust-game-engine-day23-1/800/450",
+      "https://picsum.photos/seed/rust-game-engine-day23-2/800/450"
+    ],
+    "code_snippets": [],
+    "problem_solutions": [],
+    "progress_percentage": 30,
+    "likes_count": 58,
+    "comments_count": 13,
+    "created_at": "2026-06-29T21:05:00",
+    "updated_at": "2026-06-29T21:05:00"
+  }
+]
