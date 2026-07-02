@@ -111,15 +111,9 @@ async def follow_user(
 
     db.add(follow)
 
-    current_user.following_count = max(
-        0,
-        (current_user.following_count or 0) - 1,
-    )
+    current_user.following_count = (current_user.following_count or 0) + 1
 
-    target_user.followers_count = max(
-        0,
-        (target_user.followers_count or 0) - 1,
-    )
+    target_user.followers_count = (target_user.followers_count or 0) + 1
 
     await db.commit()
     await db.refresh(follow)
