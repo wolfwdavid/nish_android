@@ -37,6 +37,34 @@ data class ProfileDto(
     val joined_date: String? = null,
 )
 
+// Response of POST/DELETE /users/{username}/follow and GET follow-status
+@Serializable
+data class FollowStatusDto(
+    val is_following: Boolean,
+    val followers_count: Int = 0,
+    val following_count: Int = 0,
+)
+
+// Request body for POST /sync_user/ (schema UserSync)
+@Serializable
+data class UserSyncBody(
+    val clerk_user_id: String,
+    val email: String,
+    val display_name: String? = null,
+    val avatar_url: String? = null,
+)
+
+// Response of POST /sync_user/ (schema UserResponse)
+@Serializable
+data class SyncedUserDto(
+    val clerk_user_id: String,
+    val username: String,
+    val display_name: String? = null,
+    val email: String,
+    val avatar_url: String? = null,
+    val onboarding_completed: Boolean = false,
+)
+
 // Mirrors the inline dict returned by backend/app/router/search.py::search_users
 @Serializable
 data class SearchUserDto(

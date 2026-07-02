@@ -61,6 +61,27 @@ data class JournalDto(
     val updated_at: String,
 )
 
+// Request body for POST /live-projects/{slug}/journals (CreateLiveProjectJournal).
+// day_number is required by the schema but recomputed server-side — send 0.
+@Serializable
+data class CreateJournalBody(
+    val day_number: Int = 0,
+    val content: String,
+    val entry_type: String = "progress",
+    val media_urls: List<String> = emptyList(),
+    val code_snippets: List<String> = emptyList(),
+    val problem_solutions: List<ProblemSolutionDto> = emptyList(),
+    val progress_percentage: Int? = null,
+)
+
+// Response of POST/DELETE /live-projects/journals/{id}/like
+@Serializable
+data class JournalLikeDto(
+    val message: String? = null,
+    val likes_count: Int = 0,
+    val is_liked: Boolean = false,
+)
+
 // Mirrors backend/app/schema/liveProjects.py::FeedLiveProject
 @Serializable
 data class FeedLiveProjectDto(

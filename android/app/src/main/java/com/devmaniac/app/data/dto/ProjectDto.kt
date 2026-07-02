@@ -43,6 +43,19 @@ data class PaginatedProjectsDto(
     val has_more: Boolean = false,
 )
 
+// Request body for POST /projects/{slug}/comments (schema AddComment)
+@Serializable
+data class AddCommentBody(
+    val content: String,
+    val parent_id: String? = null,
+)
+
+// Request body for POST /projects/comments/{id}/vote (schema AddVote)
+@Serializable
+data class AddVoteBody(
+    val vote_type: String, // "up" or "down"
+)
+
 // Mirrors backend/app/schema/project.py::CommentUser
 @Serializable
 data class CommentUserDto(
