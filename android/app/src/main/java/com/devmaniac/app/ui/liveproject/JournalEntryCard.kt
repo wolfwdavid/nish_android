@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
@@ -53,7 +55,12 @@ private val entryTypeStyles = mapOf(
 )
 
 @Composable
-fun JournalEntryCard(entry: JournalDto, modifier: Modifier = Modifier) {
+fun JournalEntryCard(
+    entry: JournalDto,
+    modifier: Modifier = Modifier,
+    liked: Boolean = false,
+    onToggleLike: (() -> Unit)? = null,
+) {
     val style = entryTypeStyles[entry.entry_type]
         ?: EntryTypeStyle(entry.entry_type.replaceFirstChar { it.uppercase() }, TextMuted)
 
@@ -176,15 +183,22 @@ fun JournalEntryCard(entry: JournalDto, modifier: Modifier = Modifier) {
                     color = PrimaryBright,
                 )
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = if (onToggleLike != null) Modifier.clickable { onToggleLike() } else Modifier,
+            ) {
                 Icon(
-                    Icons.Outlined.FavoriteBorder,
-                    contentDescription = "Likes",
-                    tint = TextFaint,
+                    imageVector = if (liked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                    contentDescription = if (liked) "Unlike" else "Like",
+                    tint = if (liked) PrimaryBright else TextFaint,
                     modifier = Modifier.height(15.dp),
                 )
                 Spacer(Modifier.width(4.dp))
-                Text("${entry.likes_count}", style = MaterialTheme.typography.labelMedium, color = TextFaint)
+                Text(
+                    text = "${entry.likes_count}",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (liked) PrimaryBright else TextFaint,
+                )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(

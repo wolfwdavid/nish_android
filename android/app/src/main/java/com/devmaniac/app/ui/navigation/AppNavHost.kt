@@ -3,6 +3,7 @@ package com.devmaniac.app.ui.navigation
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -13,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.devmaniac.app.ui.auth.SignInScreen
 import com.devmaniac.app.ui.explore.ExploreScreen
+import com.devmaniac.app.ui.liveproject.JournalComposerScreen
 import com.devmaniac.app.ui.liveproject.LiveProjectScreen
 import com.devmaniac.app.ui.liveproject.LiveProjectsScreen
 import com.devmaniac.app.ui.profile.ProfileScreen
@@ -85,10 +87,28 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             }
             composable<LiveProjectDetailRoute> { entry ->
                 val route = entry.toRoute<LiveProjectDetailRoute>()
+                val posted by entry.savedStateHandle
+                    .getStateFlow("journal_posted", false)
+                    .collectAsState()
                 LiveProjectScreen(
                     slug = route.slug,
                     onBack = { navController.popBackStack() },
                     onOpenUser = { navController.navigate(UserProfileRoute(it)) },
+                    onComposeEntry = { navController.navigate(JournalComposerRoute(it)) },
+                    refreshSignal = posted,
+                    onRefreshConsumed = { entry.savedStateHandle["journal_posted"] = false },
+                )
+            }
+            composable<JournalComposerRoute> { entry ->
+                val route = entry.toRoute<JournalComposerRoute>()
+                JournalComposerScreen(
+                    slug = route.slug,
+                    onBack = { navController.popBackStack() },
+                    onPosted = {
+                        navController.previousBackStackEntry
+                            ?.savedStateHandle?.set("journal_posted", true)
+                        navController.popBackStack()
+                    },
                 )
             }
             composable<UserProfileRoute> { entry ->

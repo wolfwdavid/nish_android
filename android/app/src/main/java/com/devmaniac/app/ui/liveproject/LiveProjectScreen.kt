@@ -17,7 +17,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -54,6 +56,9 @@ fun LiveProjectScreen(
     slug: String,
     onBack: () -> Unit,
     onOpenUser: (String) -> Unit,
+    onComposeEntry: (String) -> Unit,
+    refreshSignal: Boolean = false,
+    onRefreshConsumed: () -> Unit = {},
     viewModel: LiveProjectViewModel = viewModel(
         key = "live-$slug",
         factory = containerViewModelFactory { LiveProjectViewModel(it, slug) },
@@ -61,7 +66,28 @@ fun LiveProjectScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    androidx.compose.runtime.LaunchedEffect(refreshSignal) {
+        if (refreshSignal) {
+            viewModel.load()
+            onRefreshConsumed()
+        }
+    }
+    val authState by viewModel.authState.collectAsStateWithLifecycle()
+    val canWrite = authState != com.devmaniac.app.auth.AuthState.SignedOut
+
     Scaffold(
+        floatingActionButton = {
+            val content = (state as? UiState.Content)?.value
+            if (content?.isOwner == true && canWrite) {
+                FloatingActionButton(
+                    onClick = { onComposeEntry(slug) },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                ) {
+                    Icon(Icons.Filled.Add, contentDescription = "Add journal entry")
+                }
+            }
+        },
         topBar = {
             TopAppBar(
                 title = {
@@ -110,7 +136,15 @@ fun LiveProjectScreen(
                         item { EmptyState("No journal entries yet") }
                     } else {
                         items(current.value.journals, key = { it.id }) { entry ->
-                            JournalEntryCard(entry)
+                            JournalEntryCard(
+                                entry = entry,
+                                liked = entry.id in current.value.likedJournalIds,
+                                onToggleLike = if (canWrite) {
+                                    { viewModel.toggleLike(entry.id) }
+                                } else {
+                                    null
+                                },
+                            )
                         }
                     }
                 }
