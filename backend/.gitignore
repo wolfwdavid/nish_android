@@ -1,0 +1,106 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+build/
+
+# production
+dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# mac
+.DS_Store
+
+# windows
+Thumbs.db
+
+# vscode
+.vscode/
+
+# idea
+.idea/
+
+# coverage
+coverage/
+
+# temporary files
+*.tmp
+*.temp
+
+# python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
+
+# virtual envs
+venv/
+.venv/
+env/
+
+# fastapi / uvicorn
+*.log
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# sqlite
+*.sqlite3
+
+# alembic
+alembic/versions/__pycache__/
+
+# uploads
+uploads/
+
+# cloudinary temp
+tmp/
+
+# local database
+*.db
+
+# turbo
+.turbo/
+
+# parcel
+.cache/
+
+# generated
+generated/
+
+# secrets
+secrets.json
+credentials.json
+
+# docker
+*.pid
+docker-data/
+
+# misc
+*.swp
+*.swo
