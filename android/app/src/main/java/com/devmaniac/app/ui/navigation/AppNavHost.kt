@@ -72,8 +72,6 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 ProfileScreen(
                     username = null,
                     onOpenSettings = { navController.navigate(SettingsRoute) },
-                    onOpenProject = { navController.navigate(ProjectDetailRoute(it)) },
-                    onOpenLiveProject = { navController.navigate(LiveProjectDetailRoute(it)) },
                 )
             }
             composable<ProjectDetailRoute> { entry ->
@@ -97,8 +95,6 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 ProfileScreen(
                     username = route.username,
                     onOpenSettings = { navController.navigate(SettingsRoute) },
-                    onOpenProject = { navController.navigate(ProjectDetailRoute(it)) },
-                    onOpenLiveProject = { navController.navigate(LiveProjectDetailRoute(it)) },
                 )
             }
             composable<SettingsRoute> {
