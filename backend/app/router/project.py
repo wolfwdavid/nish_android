@@ -390,11 +390,24 @@ async def edit_comment(
     db: AsyncSession = Depends(get_db),
 ):
 
+    user = await db.scalar(
+        select(User).where(
+            User.clerk_user_id == clerk_user_id
+        )
+    )
+
+    if not user:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
     return await update_project_comment(
         db=db,
         comment_id=comment_id,
         data=data,
-        clerk_user_id=clerk_user_id,
+        user_id=user.id,
     )
 
 
@@ -411,10 +424,23 @@ async def remove_comment(
     db: AsyncSession = Depends(get_db),
 ):
 
+    user = await db.scalar(
+        select(User).where(
+            User.clerk_user_id == clerk_user_id
+        )
+    )
+
+    if not user:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
     return await delete_project_comment(
         db=db,
         comment_id=comment_id,
-        clerk_user_id=clerk_user_id,
+        user_id=user.id,
     )
 
 
@@ -433,11 +459,24 @@ async def vote_comment(
     db: AsyncSession = Depends(get_db),
 ):
 
+    user = await db.scalar(
+        select(User).where(
+            User.clerk_user_id == clerk_user_id
+        )
+    )
+
+    if not user:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found",
+        )
+
     return await vote_on_comment(
         db=db,
         comment_id=comment_id,
         data=data,
-        clerk_user_id=clerk_user_id,
+        user_id=user.id,
     )
 
 
