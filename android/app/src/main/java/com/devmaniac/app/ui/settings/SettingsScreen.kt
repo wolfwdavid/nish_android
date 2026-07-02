@@ -48,9 +48,11 @@ import com.devmaniac.app.ui.theme.TextMuted
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
+    onSignIn: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = containerViewModelFactory { SettingsViewModel(it) }),
 ) {
     val snapshot by viewModel.snapshot.collectAsStateWithLifecycle()
+    val authState by viewModel.authState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -148,6 +150,45 @@ fun SettingsScreen(
                     enabled = baseUrlDraft != current.baseUrl,
                     modifier = Modifier.padding(top = 8.dp),
                 ) { Text("Save URL") }
+            }
+
+            if (viewModel.clerkConfigured) {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(SurfaceCard, RoundedCornerShape(12.dp))
+                        .padding(14.dp),
+                ) {
+                    Text(
+                        text = "Account",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    val clerkState = authState
+                    if (clerkState is com.devmaniac.app.auth.AuthState.ClerkUser) {
+                        Text(
+                            text = "Signed in as ${clerkState.email ?: clerkState.clerkUserId}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextMuted,
+                            modifier = Modifier.padding(top = 2.dp),
+                        )
+                        Button(
+                            onClick = viewModel::signOut,
+                            modifier = Modifier.padding(top = 8.dp),
+                        ) { Text("Sign out") }
+                    } else {
+                        Text(
+                            text = "Sign in with your DevManiac account.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextMuted,
+                            modifier = Modifier.padding(top = 2.dp),
+                        )
+                        Button(
+                            onClick = onSignIn,
+                            modifier = Modifier.padding(top = 8.dp),
+                        ) { Text("Sign in") }
+                    }
+                }
             }
 
             Column(

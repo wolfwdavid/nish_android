@@ -28,3 +28,9 @@ data class UserProfileRoute(val username: String)
 
 @Serializable
 data object SettingsRoute
+
+@Serializable
+data object SignInRoute
+
+@Serializable
+data class JournalComposerRoute(val slug: String)

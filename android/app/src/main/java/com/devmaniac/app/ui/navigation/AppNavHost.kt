@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.devmaniac.app.ui.auth.SignInScreen
 import com.devmaniac.app.ui.explore.ExploreScreen
 import com.devmaniac.app.ui.liveproject.LiveProjectScreen
 import com.devmaniac.app.ui.liveproject.LiveProjectsScreen
@@ -98,7 +99,16 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
                 )
             }
             composable<SettingsRoute> {
-                SettingsScreen(onBack = { navController.popBackStack() })
+                SettingsScreen(
+                    onBack = { navController.popBackStack() },
+                    onSignIn = { navController.navigate(SignInRoute) },
+                )
+            }
+            composable<SignInRoute> {
+                SignInScreen(
+                    onBack = { navController.popBackStack() },
+                    onSignedIn = { navController.popBackStack() },
+                )
             }
         }
     }
